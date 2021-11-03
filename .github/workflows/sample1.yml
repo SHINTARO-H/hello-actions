@@ -1,0 +1,16 @@
+name: Action Samle1
+
+on: push
+
+jobs:
+  job1:
+    name: touch and echo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+      - name: make file
+        run: touch sample1.txt
+      - name: check file
+        run: ls -l
+        
