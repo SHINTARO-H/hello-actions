@@ -18,10 +18,10 @@ jobs:
           last_name  =`echo $(jq -r '.last_name'  <<< "$politician_data")`
           age        =`echo $(jq -r '.age'        <<< "$politician_data")`
           type       =`echo $(jq -r '.type'       <<< "$politician_data")`
-          echo first_name = $first_name
-          echo last_name = $last_name
-          echo age = $age
-          echo type = $type
+          echo `first_name = "$first_name"`
+          echo `last_name = "$last_name"`
+          echo `age = "$age"`
+          echo `type = "$type"`
 
   job1:
     name: touch and echo
