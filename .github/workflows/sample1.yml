@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: get json param
         run: |
-          politician_data = 'cat ./aso.json'
+          politician_data=`cat ./aso.json`
           echo $politician_data
           first_name =`echo $(jq -r '.first_name' <<< "$politician_data")`
           last_name  =`echo $(jq -r '.last_name'  <<< "$politician_data")`
