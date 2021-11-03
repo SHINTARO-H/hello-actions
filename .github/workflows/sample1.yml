@@ -3,6 +3,24 @@ name: Action Samle1
 on: push
 
 jobs:
+
+  job0:
+    name: Set global env
+    runs-on: ubuntu-latest
+    steps:
+      - name: get json param
+        run: |
+          politician_data = 'cat ./aso.json'
+          echo $politician_data
+          first_name =`echo $(jq -r '.first_name' <<< "$politician_data")`
+          last_name  =`echo $(jq -r '.last_name'  <<< "$politician_data")`
+          age        =`echo $(jq -r '.age'        <<< "$politician_data")`
+          type       =`echo $(jq -r '.type'       <<< "$politician_data")`
+          echo first_name = $first_name
+          echo last_name = $last_name
+          echo age = $age
+          echo type = $type
+
   job1:
     name: touch and echo
     runs-on: ubuntu-latest
