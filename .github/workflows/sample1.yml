@@ -45,5 +45,5 @@ jobs:
       - name: check file
         run: ls -l
       - name: read env
-          echo end..
+        run: echo end..
         
