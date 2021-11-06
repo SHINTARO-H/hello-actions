@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v2.0.0
-      - name: get json param
+      - name: get json param and set-output
         run: |
           politician_data=`cat ./aso.json`
           echo $politician_data
@@ -18,10 +18,21 @@ jobs:
           last_name=`echo $(jq -r '.last_name' <<< "$politician_data")`
           age=`echo $(jq -r '.age' <<< "$politician_data")`
           type=`echo $(jq -r '.type' <<< "$politician_data")`
+          #-----debug-----#
           echo first_name = $first_name
           echo last_name = $last_name
           echo age = $age
           echo type = $type
+          #-----debug-----#
+          echo "::set-output name=FIRST_NAME::${{first_name}}"
+          echo "::set-output name=LAST_NAME::${{last_name}}"
+          echo "::set-output name=AGE::${{age}}"
+          echo "::set-output name=TYPE::${{type}}"
+        id: setting_param
+      - name: get param and print settings
+        run: |
+          my_first_name=${{ steps.setting_param.outputs.FIRST_NAME }}
+          echo my_first_name is $my_first_name
 
   job1:
     name: touch and echo
@@ -33,4 +44,6 @@ jobs:
         run: touch sample1.txt
       - name: check file
         run: ls -l
+      - name: read env
+          echo end..
         
