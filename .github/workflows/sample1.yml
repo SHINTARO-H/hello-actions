@@ -7,6 +7,8 @@ jobs:
   job0:
     name: Set global env
     runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.setting_param.outputs.FIRST_NAME }}  #Jobのオプションに公開変数を設定することで他ジョブに公開する変数を指定できる
     steps:
       - name: checkout
         uses: actions/checkout@v2.0.0
@@ -33,6 +35,8 @@ jobs:
         run: |
           my_first_name=${{ steps.setting_param.outputs.FIRST_NAME }}
           echo my_first_name is $my_first_name
+      - name: output for other job    
+          
   job1:
     name: touch and echo
     runs-on: ubuntu-latest
@@ -45,6 +49,4 @@ jobs:
       - name: check file
         run: ls -l
       - name: read env
-        run: |
-          job1_first_name=${{ jobs.steps.setting_param.outputs.FIRST_NAME }}
-          echo job1_first_name is $job1_first_name
+        run: echo "Job1 -> ${{ needs.job0.outputs.output1}}"
