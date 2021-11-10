@@ -15,7 +15,7 @@ jobs:
         id: setting_targets
         run: |
           #target_list=`cat ./hello-target.json`
-          echo "t_list=${{ jq .dummy -r ./hello-target.json }}
+          echo "t_list=${{ jq .dummy -r ./hello-target.json }}"
           echo "::set-output name=TARGETS_HELLO_LIST::${{ t_list }}"
           #TARGETS_LIST= `echo $(jq -r '.hello-target' <<< "$target_list")`
           #t_list= jq .hello-target <<< $target_list
