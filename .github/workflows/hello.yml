@@ -21,6 +21,9 @@ jobs:
       - id: setting_targets
   exec:
     name: build (need target)
+    strategy:
+      matrix:
+        language: ${{ needs.get-configs.outputs.target }}
     runs-on: ubuntu-latest
     needs: get-configs
     steps:
@@ -29,3 +32,11 @@ jobs:
       - name: build c
         run: |
           gcc ./src/c/hello.c -o ./src/c/hello
+          echo exec hello bin.
+          ./src/c/hello
+          if: ${{ matrix.language }} == "c"
+      - name: exec python
+        run: |
+          echo exec python
+          python hello.py
+          
