@@ -12,14 +12,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2.0.0
       - name: get json data
+        id: setting_targets
         run: |
           target_list=`cat ./hello-target.json`
-          TARGETS_LIST=`echo $(jq -r '.hello-target' <<< "$target_list")`
-          #-----debug-----#
-          echo TARGETS_LIST -> $TARGETS_LIST
-          #-----debug-----#
+          TARGETS_LIST= `echo $(jq -r '.hello-target' <<< "$target_list")`
           echo "::set-output name=TARGETS_HELLO_LIST::${{TARGETS_LIST}}"
-        id: setting_targets
   exec:
     name: build (need target)
     strategy:
