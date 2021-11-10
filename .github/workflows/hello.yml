@@ -19,7 +19,7 @@ jobs:
           echo TARGETS_LIST -> $TARGETS_LIST
           #-----debug-----#
           echo "::set-output name=TARGETS_HELLO_LIST::${{TARGETS_LIST}}"
-      - id: setting_targets
+        id: setting_targets
   exec:
     name: build (need target)
     strategy:
